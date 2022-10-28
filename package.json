@@ -1,6 +1,6 @@
 {
   "name": "@reawayjs/vite-plugin-svg-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A vite plugin svg-icons",
   "author": "reaway",
   "license": "MIT",
