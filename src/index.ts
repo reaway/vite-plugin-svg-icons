@@ -7,7 +7,7 @@ import getEtag from 'etag';
 import cors from 'cors';
 import fs from 'fs-extra';
 import Debug from 'debug';
-import SVGCompiler from 'svg-baker';
+import xmldoc from 'xmldoc';
 import { optimize } from 'svgo';
 import { normalizePath } from 'vite';
 import {
@@ -249,12 +249,15 @@ export async function compilerIcon(
 
   // fix cannot change svg color  by  parent node problem
   content = content.replace(/stroke="[a-zA-Z#0-9]*"/, 'stroke="currentColor"');
-  const svgSymbol = await new SVGCompiler().addSymbol({
-    id: symbolId,
-    content,
-    path: file,
-  });
-  return svgSymbol.render();
+  const svgSymbol = createSymbol(symbolId, content);
+  return svgSymbol;
+}
+
+export function createSymbol(id: string, svg: string): string {
+  const doc = new xmldoc.XmlDocument(svg);
+  doc.name = 'symbol';
+  doc.attr.id = id;
+  return doc.toString({ compressed: true });
 }
 
 export function createSymbolId(name: string, options: ViteSvgIconsPlugin) {
