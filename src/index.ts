@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
 import type { Config as OptimizeOptions } from 'svgo';
-import type { ViteSvgIconsPlugin, FileStats, DomInject } from './typing';
+import type { ViteSvgIconsPlugin, FileStats, DomInject } from '../types/index';
 import path from 'path';
 import fg from 'fast-glob';
 import getEtag from 'etag';
@@ -17,8 +17,6 @@ import {
   XMLNS,
   XMLNS_LINK,
 } from './constants';
-
-export * from './typing';
 
 const debug = Debug.debug('vite-plugin-svg-icons');
 

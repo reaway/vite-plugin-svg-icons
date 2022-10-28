@@ -9,8 +9,11 @@
     "jsx": "preserve",
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "types": [
-      "vite/client"
-    ]
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "types/**/*.ts",
+    "types/**/*.d.ts",
+  ],
 }
