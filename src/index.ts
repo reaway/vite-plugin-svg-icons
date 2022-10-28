@@ -256,6 +256,20 @@ export async function compilerIcon(
 export function createSymbol(id: string, svg: string): string {
   const doc = new xmldoc.XmlDocument(svg);
   doc.name = 'symbol';
+
+  if (!doc.attr.viewBox) {
+    if (doc.attr.width && doc.attr.height) {
+      doc.attr.viewBox = `0 0 ${parseFloat(doc.attr.width)} ${parseFloat(
+        doc.attr.height,
+      )}`;
+    }
+  }
+
+  const preserve = new Set(['viewbox', 'preserveaspectratio']);
+  Object.keys(doc.attr).forEach((x) => {
+    if (!preserve.has(x.toLowerCase())) delete doc.attr[x];
+  });
+
   doc.attr.id = id;
   return doc.toString({ compressed: true });
 }
